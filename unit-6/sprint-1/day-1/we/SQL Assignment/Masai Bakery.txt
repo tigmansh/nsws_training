@@ -1,0 +1,26 @@
+💡 Inserting Data into Customers Table.
+
+INSERT INTO customers (customer_id, first_name, last_name, email, address, city, state, zip_code)
+VALUES 
+(1, 'abc', 'a', 'abc@mail.com', '1st street', 'chennai', 'TN', '60001'),
+(2, 'efg', 'e', 'efg@mail.com', '2nd street', 'Bangalore', 'KA', '50002'),
+(3, 'ijk', 'i', 'ijk@mail.com', '3nd street', 'Mumbai', 'MH', '40002');
+
+💡 Inserting Data into Orders Table.
+
+INSERT INTO orders (order_id, customer_id, order_placed_date)
+VALUES 
+(1, 1, '2016-11-11'),
+(2, 1, '2016-10-01'),
+(3, 2, '2016-06-01'),
+(4, 2, '2015-06-01'),
+(5, 1, '2015-06-01');
+
+💡 Find the count of all orders placed in 2016, by customer email address, sorted in descending order.
+
+select customers.email, count(orders.order_id) as orderCount 
+from customers 
+join orders on customers.customer_id = orders.customer_id 
+where orders.order_placed_date between '2016-01-01' and '2016-12-31'
+group by customers.email
+order by order_count DESC;

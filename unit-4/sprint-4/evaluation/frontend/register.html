@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <nav>
+        <a href="login.html">LOGIN</a>
+    </nav>
+
+    <div id="container">
+
+        <h1>SIGN UP HERE</h1>
+
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <input type="text" id="gender" placeholder="Enter your gender">
+
+        <input type="number" id="age" placeholder="Enter your age">
+
+        <input type="text" id="city" placeholder="Enter your city">
+
+        <input type="email" id="email" placeholder="Enter your email">
+
+        <input type="password" id="pass" placeholder="Enter your password">
+
+        <button onclick="onSignup()">SIGN UP</button>
+    </div>
+</body>
+</html>
+
+<script>
+    function onSignup(){
+        const payload = {
+            name: document.getElementById("name").value,
+
+            age: document.getElementById("age").value,
+
+            gender: document.getElementById("gender").value,
+
+            city: document.getElementById("city").value,
+
+            email: document.getElementById("email").value,
+
+            pass: document.getElementById("pass").value
+        }
+
+        fetch("https://graceful-bull-sweatsuit.cyclic.app/users/register", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(payload)
+        }).then(res=> res.json())
+        .then(res=> console.log(res))
+        .catch(err=> console.log(err))
+        alert("User registered");
+        window.location.href = "login.html";
+    }
+</script>

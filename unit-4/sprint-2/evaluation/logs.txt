@@ -1,0 +1,15 @@
+route :/series/ and method: GET 
+route :/series/ and method: GET 
+route :/movies/addmovies and method: GET 
+route ://series/addseries and method: POST 
+route :/addseries and method: POST 
+route :/series/addseries and method: POST 
+route :/movies/addmovies and method: POST 
+route :/movies/addmovies and method: POST 
+route :/movies/addmovies and method: POST 
+route ://series/addseries and method: POST 
+route :/series/addseries and method: POST 
+route :/movies and method: GET 
+route :/movies/6 and method: GET 
+route :/series and method: GET 
+route :/series/112 and method: GET 

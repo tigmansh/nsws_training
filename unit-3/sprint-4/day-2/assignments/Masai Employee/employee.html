@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div id="pagination"></div>
+      
+      <label>Filter by Department:</label>
+      <select id="filter-department">
+        <option value="all">All</option>
+        <option value="operations">operations</option>
+        <option value="engineering">engineering</option>
+        <option value="hr">hr</option>
+        <option value="finance">finance</option>
+        <option value="marketing">marketing</option>
+        <!-- add more options for other departments -->
+      </select>
+      
+      <label>Sort by Salary:</label>
+      <select id="sort-salary">
+        <option value="none">None</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+      
+      <label>Search by Name:</label>
+      <input type="text" id="search-name">
+      <input type="submit" value="Search" id="searchBtn">
+
+      
+      <table id="employee-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody id="employee-table-body"></tbody>
+      </table>
+      <h1 id="no-user-found"></h1>
+      
+</body>
+
+<script>
+const table = document.getElementById("employee-table-body");
+const pagination = document.getElementById("pagination");
+const filterDepartment = document.getElementById("filter-department");
+const sortSalary = document.getElementById("sort-salary");
+const searchName = document.getElementById("search-name");
+const searchBtn = document.getElementById("searchBtn");
+const noUser = document.getElementById("no-user-found");
+
+
+let employees = [];
+// let currentPage = 1;
+// let employeesPerPage = 10;
+
+fetch("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-employees")
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+    employees = data.data;
+    console.log(employees);
+    displayEmployees(data.data);
+  })
+  .catch(error => console.log(error));
+
+
+
+function displayEmployees(data) {
+    table.innerHTML = null;
+    data.forEach((item)=>{
+        let tr = document.createElement("tr")
+        let td1 = document.createElement("td")
+        let td2 = document.createElement("td")
+        let td3 = document.createElement("td")
+        let td4 = document.createElement("td")
+        let td5 = document.createElement("td")
+
+        td1.innerText = "🙎"
+        td2.innerText = item.name
+        td3.innerText = item.salary
+        td4.innerText = item.department
+        td5.innerText = item.gender
+
+
+        tr.append(td1,td2,td3,td4,td5)
+        table.append(tr)
+    })
+ 
+  };
+
+  searchBtn.addEventListener("click",()=>{
+    
+    console.log(employees)
+   let searchedName = employees.filter((element)=>{
+   return (searchName.value === element.name);
+  });
+  console.log(searchedName);
+  if(searchedName.length == 0){
+    table.innerHTML = null;
+    noUser.innerHTML = "No User By This Name"
+  }
+  else{
+    displayEmployees(searchedName);
+  }
+})
+
+let filteredArr = [];
+  filterDepartment.addEventListener("change",()=>{
+     filteredArr = employees.filter((element)=>{
+      if(filterDepartment.value === "all"){
+        return element
+      }
+      else if(filterDepartment.value === "operations" && element.department === "operations"){
+        return element;
+      }
+      else if(filterDepartment.value === "engineering" && element.department === "engineering"){
+        return element;
+      }
+      else if(filterDepartment.value === "finance" && element.department === "finance"){
+        return element;
+      }
+      else if(filterDepartment.value === "hr" && element.department === "hr"){
+        return element;
+      }
+      else if(filterDepartment.value === "marketing" && element.department === "marketing"){
+        return element;
+      }
+    })
+    displayEmployees(filteredArr);
+  })
+
+  sortSalary.addEventListener("change",()=>{
+    if(sortSalary.value === "desc"){
+      if(filteredArr.length != 0){
+        filteredArr.sort((a,b)=> b.salary - a.salary);
+        displayEmployees(filteredArr)
+      }
+      else{
+        employees.sort((a,b)=> b.salary - a.salary);
+        displayEmployees(employees);
+      }
+    }
+
+    if(sortSalary.value === "asc"){
+      if(filteredArr.length != 0){
+        filteredArr.sort((a,b)=> a.salary - b.salary);
+        displayEmployees(filteredArr)
+      }
+      else{
+        employees.sort((a,b)=> a.salary - b.salary);
+        displayEmployees(employees);
+      }
+      
+    }
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Clear previous data
+//   employeeTableBody.innerHTML = "";
+
+//   // Logic for pagination
+//   const indexOfLastEmployee = currentPage * employeesPerPage;
+//   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+//  const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+//   // Display current employees
+//   currentEmployees.map(employee => {
+//     const row = document.createElement("tr");
+//     row.innerHTML = `
+//       <td><img src="${employee.image}" alt="employee image"></td>
+//       <td>${employee.name}</td>
+//       <td>${employee.department}</td>
+//       <td>${employee.gender}</td>
+//       <td>${employee.salary}</td>
+//     `;
+//     employeeTableBody.append(row);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Display pagination
+//   pagination.innerHTML = "";
+//   for (let i = 1; i <= Math.ceil(employees.length / employeesPerPage); i++) {
+// const pageButton = document.createElement("button");
+// pageButton.innerText = i;
+// if (i === currentPage) {
+// pageButton.classList.add("active");
+// }
+// pageButton.addEventListener("click", () => {
+// currentPage = i;
+// displayEmployees();
+// });
+// pagination.append(pageButton);
+// }
+// }
+
+// // Logic for filtering
+// filterDepartment.addEventListener("change", event => {
+// if (event.target.value === "") {
+// employees = employees;
+// } else {
+// employees = employees.filter(employee => employee.department === event.target.value);
+// }
+// currentPage = 1;
+// displayEmployees();
+// });
+
+// // Logic for sorting
+// sortSalary.addEventListener("change", event => {
+// if (event.target.value === "asc") {
+// employees.sort((a, b) => a.salary - b.salary);
+// } else if (event.target.value === "desc") {
+// employees.sort((a, b) => b.salary - a.salary);
+// }
+// displayEmployees();
+// });
+
+// // Logic for searching
+// searchName.addEventListener("input", event => {
+// employees = employees.filter(employee => employee.name.toLowerCase().includes(event.target.value.toLowerCase()));
+// currentPage = 1;
+// displayEmployees();
+// });
+
+</script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Masai Calculator</title>
+    <style>
+      .content{
+        display: flex;
+      }
+      #container{
+        display: block;
+        text-align: center;
+        width: 500px;
+        height: 700px;
+        margin: auto;
+        color: teal;
+      }
+      #container input{
+        width: 300px;
+        height: 50px;
+        border: 0px;
+        border-radius:10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      .content{
+        width: 330px;
+        height: 50px;
+        margin-top: 30px;
+        margin: auto;
+        margin-top: 30px;
+      }
+      .content > div > button{
+        width: 60px;
+        height: 60px;
+        border: 0px;
+        border-radius:10px;
+       margin-left: 18px;
+       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+       font-size: larger;
+      }
+      #inner{
+        margin-top: 100px;
+        padding: 50px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        margin: auto;
+        width: 330px;
+      }
+      #operators{
+        background-color: #263238;
+        color: #fff;
+      } 
+      #clear{
+        background-color: #FF5722;
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+    <div id="container">
+     <h1>Masai Calculator</h1>
+       <div id="inner">
+          <div>
+             <input type="number">
+          </div>
+          <div class="content">
+             <div><button>1</button></div>
+             <div><button>2</button></div>
+             <div><button>3</button></div>
+             <div><button id="operators">+</button></div>
+          </div>
+          <div class="content">
+             <div><button>4</button></div>
+             <div><button>5</button></div>
+             <div><button>6</button></div>
+             <div><button id="operators">-</button></div>
+         </div>
+         <div class="content">
+             <div><button>7</button></div>
+             <div><button>8</button></div>
+             <div><button>9</button></div>
+             <div><button id="operators">x</button></div>           
+         </div>
+         <div class="content">
+             <div><button id="clear">c</button></div>
+             <div><button>0</button></div>
+             <div><button id="operators">=</button></div>
+             <div><button id="operators">/</button></div> 
+        </div>
+       </div>
+   </div> 
+</body>
+</html>

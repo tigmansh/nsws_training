@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+</head>
+<body>
+    <input type="number" placeholder="Enter OTP" id="otp">
+</body>
+<script>
+let input = document.getElementById("otp");
+let rightOTP = 1234;
+let promise = new Promise ((resolve,reject) => {
+setTimeout(()=>{
+    if(rightOTP == input.value){
+        resolve("Correct OTP");
+    }
+    else{
+        reject("Wrong OTP");
+    }
+},10000)
+})
+
+promise.then((res)=>{
+    alert(res);
+})
+.catch((error)=>{
+    alert(error);
+})
+</script>
+</html>

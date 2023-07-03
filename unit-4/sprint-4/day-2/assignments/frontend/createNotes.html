@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATE NOTES</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body style="background-image: url(https://images.pexels.com/photos/1629212/pexels-photo-1629212.jpeg?cs=srgb&dl=pexels-min-an-1629212.jpg&fm=jpg);background-repeat: no-repeat;">
+
+    <nav>
+        <a href="notes.html">YOUR NOTES</a>
+
+        <!-- <a href="createNotes.html">CREATE NOTES</a> -->
+    </nav>
+
+    <div id="container">
+        <h1>Note Creation Page</h1>
+        <input type="text" id="title" placeholder="Enter note title">
+
+        <input type="text" id="note" placeholder="Enter note body">
+
+        <input type="text" id="category" placeholder="Enter note category">
+
+        <button onclick="onAdd()">Create</button>
+
+    </div>
+</body>
+
+</html>
+<script>
+    function onAdd() {
+        const payload = {
+            title: document.getElementById("title").value,
+            note: document.getElementById("note").value,
+            category: document.getElementById("category").value,
+        }
+
+        fetch("https://cute-puce-macaw-cuff.cyclic.app/notes/create", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            },
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
+        alert("Note created 🎉");
+        window.location.href = "notes.html";
+    }
+</script>

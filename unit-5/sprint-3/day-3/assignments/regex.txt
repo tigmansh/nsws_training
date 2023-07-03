@@ -1,0 +1,14 @@
+⭐ Regular expression to match all Email Addresses
+➡️ /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+⭐ Regular expression to match all credit card numbers
+➡️ /^\d{4}-\d{4}-\d{4}-\d{4}$/
+
+⭐ Regular expression to match all hexadecimal color codes
+➡️ /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+
+⭐ Regular expression to match all YouTube video URLs
+➡️ /^https:\/\/www\.youtube\.com\/watch\?v={11}$/
+
+⭐ Regular expression to match all HTML comments in a string
+➡️ /<!--(.|\n)*?-->/

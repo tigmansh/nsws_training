@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body
+    style="background-image: url(https://images.pexels.com/photos/1629212/pexels-photo-1629212.jpeg?cs=srgb&dl=pexels-min-an-1629212.jpg&fm=jpg);background-repeat: no-repeat;">
+
+    <nav>
+        <a href="notes.html">YOUR NOTES</a>
+
+        <a href="createNotes.html">CREATE NOTES</a>
+    </nav>
+
+    <div id="container">
+        <h1>LOGIN HERE</h1>
+
+        <input type="email" id="email" placeholder="Enter your email id...">
+
+        <input type="password" id="pass" placeholder="Enter your password...">
+
+        <button onclick="onLogin()">Login</button>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    function onLogin() {
+        const payload = {
+            email: document.getElementById("email").value,
+            pass: document.getElementById("pass").value
+        }
+
+        fetch("https://cute-puce-macaw-cuff.cyclic.app/users/login", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+
+            },
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res)
+                localStorage.setItem("token", res.token);
+                if (!res.token) {
+                    alert("User not found 🚫");
+                }
+                else {
+
+                    alert("Logged in successfully 🎉");
+                    window.location.href = "createNotes.html";
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+</script>

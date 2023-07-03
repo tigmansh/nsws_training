@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+        integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+        crossorigin="anonymous"></script>
+    <title>VOTE APP</title>
+
+    <style>
+        #container {
+            width: 33%;
+            margin: auto;
+            margin-top: 100px;
+            min-height: 10rem;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        #main {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h2>Vote App</h2>
+        <div id="main">
+            <div id="data">
+                <h4>Candidates</h4>
+                <p>Gandhi</p>
+                <p>Modi</p>
+                <p>Kejriwal</p>
+                <p>Akhilesh</p>
+            </div>
+            <div id="votes">
+                <h4>Total Votes</h4>
+                <p id="gandhi-vote"></p>
+                <p id="modi-vote"></p>
+                <p id="kejriwal-vote"></p>
+                <p id="akhilesh-vote"></p>
+            </div>
+            <div id="votebtn">
+                <h4>Vote here</h4>
+                <button id="gandhi">Vote</button><br><br>
+                <button id="modi">Vote</button><br><br>
+                <button id="kejriwal">Vote</button><br><br>
+                <button id="akhilesh">Vote</button><br><br>
+            </div>
+        </div>
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <script>
+            const socket = io("http://localhost:7300", { transports: ["websocket"] });
+
+
+            let gandhi = document.getElementById("gandhi");
+            let modi = document.getElementById("modi");
+            let kejriwal = document.getElementById("kejriwal");
+            let akhilesh = document.getElementById("akhilesh");
+
+            socket.on("vote", (candidates) => {
+
+                let gandhiVote = document.getElementById("gandhi-vote");
+                let modiVote = document.getElementById("modi-vote");
+                let kejriwalVote = document.getElementById("kejriwal-vote");
+                let akhileshVote = document.getElementById("akhilesh-vote");
+
+                gandhiVote.innerText = candidates.Gandhi;
+                modiVote.innerText = candidates.Modi;
+                kejriwalVote.innerText = candidates.Kejriwal;
+                akhileshVote.innerText = candidates.Akhilesh;
+            })
+            socket.on("alreadyVoted", () => {
+                alert("You can vote only for 1 time 👍");
+            })
+
+            gandhi.addEventListener("click", (e)=> {
+                e.preventDefault();
+                socket.emit("gandhi", 1);
+            })
+            modi.addEventListener("click", (e)=> {
+                e.preventDefault();
+                socket.emit("modi", 1);
+            })
+            kejriwal.addEventListener("click", (e)=> {
+                e.preventDefault();
+                socket.emit("kejriwal", 1);
+            })
+            akhilesh.addEventListener("click", (e)=> {
+                e.preventDefault();
+                socket.emit("akhilesh", 1);
+            })
+        </script>
+</body>
+
+</html>

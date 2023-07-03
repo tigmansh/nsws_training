@@ -1,0 +1,119 @@
+💡 INSERTING DATA INTO 4 TABLES....
+
+▶️ INSERT INTO DEPOSIT (ACTNO, CNAME, BNAME, AMOUNT, ADATE)
+VALUES
+(100, 'Anil', 'Vrce', 1000, '1995-03-01'),
+(101, 'Sunil', 'MGRoad', 5000, '1996-01-04'),
+(102, 'Rahul', 'Karolbagh', 3500, '1995-11-17'),
+(103, 'Madhuri', 'Chandni', 1200, '1995-12-17'),
+(104, 'Pramod', 'MGRoad', 3000, '1996-03-27'),
+(105, 'Sandip', 'Karolbagh', 2000, '1996-03-31');
+
+▶️ INSERT INTO BRANCH (BNAME, CITY)
+VALUES
+('VRCE', 'NAGPUR'),
+('KAROLBAGH', 'DELHI'),
+('CHANDNI', 'DELHI'),
+('MGRoad', 'BANGALORE');
+
+▶️ INSERT INTO CUSTOMER (CNAME, CITY)
+VALUES
+('ANIL', 'CALCUTA'),
+('RAHUL', 'BARODA'),
+('MADHURI', 'NAGPUR'),
+('PRAMOD', 'NAGPUR'),
+('SUNIL', 'DELHI');
+
+▶️ INSERT into BORROW (LOANNO, CNAME, BNAME, AMOUNT)
+VALUES
+(201, 'ANIL', 'VRCE', 1000),
+(206, 'RAHUL', 'KAROLBAGH', 5000),
+(311, 'SUNIL', 'MGRoad', 3000),
+(321, 'MADHURI', 'CHANDNI', 2000),
+(375, 'PRAMOD', 'MGRoad', 8000);
+
+💡Retrieve all the records from the table BORROW where the amount in between 2000 and 3000
+
+SELECT * FROM BORROW
+WHERE AMOUNT BETWEEN 2000 AND 3000;
+
+💡 Retrieve the details from the table DEPOSIT
+
+SELECT * FROM DEPOSIT;
+
+💡 Retrieve the customer name, account no of DEPOSIT
+
+SELECT CNAME, ACTNO FROM DEPOSIT;
+
+💡 Retrieve the name of the customer living in NAGPUR.
+
+SELECT CNAME FROM CUSTOMER
+WHERE CITY = 'NAGPUR';
+
+💡 Retrieve the name of the customers who opened accounts after 17-NOV-95.
+
+SELECT CNAME FROM DEPOSIT
+WHERE ADATE > '1995-11-17';
+
+💡 Retrieve the account number and amount of the customer having an account opened between 01-12-95 and 01-06.96.
+
+Select ACTNO, AMOUNT from DEPOSIT
+WHERE ADATE BETWEEN '1995-12-01' AND '1996-06-01';
+
+💡 Retrieve all the records from the table DEPOSIT where CNAME begins with C.
+
+SELECT * FROM DEPOSIT
+WHERE CNAME LIKE 'C%';
+
+💡 Retrieve all the records from the table BORROW where the 2nd character of CNAME is U.
+
+SELECT * FROM BORROW
+WHERE CNAME LIKE '_U%';
+
+💡 Retrieve all the records from the table DEPOSIT where the branch name is CHANDNI or MG ROAD.
+
+SELECT * FROM DEPOSIT
+WHERE BNAME = 'CHANDNI' OR BNAME = 'MGRoad';
+
+💡 Retrieve all the records from the table DEPOSIT where the branch name is not CHANDNI or MG ROAD.
+
+SELECT * FROM DEPOSIT
+WHERE BNAME <> 'CHANDNI' AND BNAME <> 'MGRoad';
+
+💡 Retrieve all the records from DEPOSIT where the amount > 1000 and arrange the customer name in ascending order.
+
+SELECT * FROM DEPOSIT
+WHERE AMOUNT > 1000
+ORDER BY CNAME ASC;
+
+💡 Retrieve all the records from DEPOSIT where the amount > 1000 and arrange the customer name in descending order.
+
+SELECT * FROM DEPOSIT
+WHERE AMOUNT > 1000
+ORDER BY CNAME DESC;
+
+💡 Retrieve customer details from the BORROW table where the third character of the customer name is either ‘A’ or ‘D’.
+
+SELECT * FROM BORROW
+WHERE CNAME LIKE '__A%' OR CNAME LIKE '__D%';
+
+💡 Retrieve all the records from the table BORROW where the amount is not between 2000 and 8000.
+
+SELECT * FROM BORROW
+WHERE AMOUNT < 2000 OR AMOUNT > 8000;
+
+💡 Find out the unique records from the table DEPOSIT.
+
+SELECT DISTINCT * FROM DEPOSIT;
+
+💡 Update the amount of all depositors in the deposit table by giving them 10% interest (i.e. amount=amount * 0.1) where the branch is VRCE.
+
+UPDATE DEPOSIT
+SET AMOUNT = AMOUNT * 1.1
+WHERE BNAME = 'VRCE';
+
+💡 Update the amount of all depositors in the deposit table by giving them 10% interest where the branch is VRCE and the customer name is ANIL.
+
+UPDATE DEPOSIT
+SET AMOUNT = AMOUNT * 1.1
+WHERE BNAME = 'VRCE' AND CNAME = 'ANIL';

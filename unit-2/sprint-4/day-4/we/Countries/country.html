@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries Data</title>
+    <style>
+        
+        #container{
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-auto-rows: auto;
+            gap: 15px;
+        }
+
+        #container div{
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            /* padding-left: 10px; */
+        }
+
+        #container img{
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <select id="filter">
+        <option value="">Select Region</option>
+        <option value="Africa">Africa</option>
+        <option value="Asia">Asia</option>
+        <option value="Americas">Americas</option>
+        <option value="Europe">Europe</option>
+    </select>
+    <div id="container"></div>
+</body>
+<script>
+    // https://restcountries.com/v3.1/all
+    // 1. fetch the data.
+    // 2. Loop over the data and show it in DOM 
+    // from API -> Name(element.name.official), Region(element.region), Population(element.population), Flag(element.flags.png) 
+
+    // flag(img) -> Name(h2) -> region(p) -> Population(p).
+
+    let container = document.getElementById("container");
+
+    let filterSelect = document.getElementById("filter");
+
+    let fetchedData = [];
+
+    fetchData();
+
+    filterSelect.addEventListener("change",function(){
+        let filteredData = fetchedData.filter((element) =>{
+            if(element.region === filterSelect.value){
+                return true;
+            }
+            else{
+                return false;
+            }
+        })
+
+        container.innerHTML = null;
+
+        displayCountries(filteredData);
+    })
+    function fetchData(){
+        let promise = fetch("https://restcountries.com/v3.1/all")
+        promise.then((responseObject) => {
+            return responseObject.json();
+        })
+        .then((acctualData)=>{
+
+            //Doing map because given data is very very big so we are mapping the things which only we want.
+
+            let myNeededData = acctualData.map((element)=>{
+                let obj = {
+                    name: element.name.official,
+                    region: element.region,
+                    population: element.population,
+                    flag: element.flags.png,
+                }
+                return obj;
+            })
+            
+            fetchedData = myNeededData;
+
+            displayCountries(myNeededData);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+
+    function displayCountries (data){
+        data.forEach((element) =>{
+            
+            let card = document.createElement("div");
+            
+            let flag = document.createElement("img");
+            flag.setAttribute("src",element.flag);
+
+            let name = document.createElement("h2");
+            name.innerText = "Name: "+element.name;
+
+            let region = document.createElement("h4");
+            region.innerText = "Region: "+element.region;
+
+            let population = document.createElement("p");
+            population.innerText = "Population: "+element.population;
+            
+            card.append(flag,name,region,population);
+            
+            container.append(card);
+        });
+    }
+   
+    // write async to convert the promises into synchronous
+
+    // await tell js wait till promise has been cleared.
+    
+    async function fetchData2() {
+        let responseObject = await fetch("https://restcountries.com/v3.1/all");
+        console.log(responseObject);
+    }
+
+    fetchData2();
+</script>
+</html>

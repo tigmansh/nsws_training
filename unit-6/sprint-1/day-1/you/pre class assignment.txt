@@ -1,0 +1,37 @@
+=> Question 1 ⬇️
+
+CREATE TABLE users (
+   id INT PRIMARY KEY,
+   name VARCHAR(50),
+   email VARCHAR(50)
+);
+
+=> Question 2 (PART-I) ⬇️
+
+💡What are different SQL databases?
+
+There are many different SQL databases available, each with their own unique features and characteristics. Here are some of the most popular ones:
+
+1. MySQL: An open-source relational database management system that is widely used for web applications.
+
+2. Oracle: A powerful and robust database management system that is used by many large corporations for their mission-critical applications.
+
+3. Microsoft SQL Server: A popular database management system that is widely used in the Windows environment.
+
+4. PostgreSQL: An open-source object-relational database management system that is known for its stability and reliability.
+
+5. SQLite: A lightweight, embedded database management system that is often used in mobile applications.
+
+=> Question 2 (PART-II) ⬇️
+
+💡What is RDBMS?
+
+RDBMS stands for Relational Database Management System. It is a software system that is used to manage and organize data in a relational database. A relational database is a type of database that organizes data into one or more tables, with each table consisting of a set of rows and columns.
+
+An RDBMS provides a set of tools and features for creating, modifying, and querying relational databases. Some of the key features of an RDBMS include:
+
+1. Support for a standard query language, such as SQL (Structured Query Language).
+
+2. Ability to define relationships between tables, which allows for the creation of complex data models.
+
+3. Support for transactions, which ensures that data is stored and retrieved reliably.

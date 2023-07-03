@@ -1,0 +1,25 @@
+{
+  "movies": [
+    {
+      "movie_id": 2,
+      "name": "Tathastu",
+      "genre": "comedy",
+      "director": "Tigmanshu Garg"
+    },
+    { "movie_id": 3, "name": "Pathan", "genre": "Thriller", "director": "SRK" }
+  ],
+  "series": [
+    {
+      "series_id": 1,
+      "name": "Money Heist",
+      "genre": "crime-thriller",
+      "director": "Professor"
+    },
+    {
+      "series_id": 2,
+      "name": "Vikings",
+      "genre": "crime-thriller",
+      "director": "hella"
+    }
+  ]
+}

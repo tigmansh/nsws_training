@@ -1,0 +1,11 @@
+1) Find largest population city in every state.
+
+=> db.cityData.aggregate([ { $group: { _id: { state: "$state", city: "$city" }, population: { $sum: "$pop" } } }, { $sort: { population: -1 } }, { $group: { _id: "$_id.state", city: { $first: "$_id.city" }, population: { $first: "$population" } } }])
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) Find average population per state by cities.
+
+=> db.cityData.aggregate([{$group: {_id: {state: "$state", city: "$city"},population: {$sum: "$pop"}}},{$group: {_id: "$_id.state",avg_population: {$avg: "$population"}}}])
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) Find the lowest population city.
+
+=> db.cityData.aggregate([{$group: {_id: {state: "$state", city: "$city"},population: {$sum: "$pop"}}},{$sort: {population: 1}}, {$limit: 1}])

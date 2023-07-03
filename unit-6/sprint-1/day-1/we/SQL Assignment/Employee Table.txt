@@ -1,0 +1,19 @@
+💡 To show the second-highest salary from the Worker table
+
+SELECT MAX(SALARY) FROM Worker WHERE SALARY < (SELECT MAX(SALARY) FROM Worker);
+
+💡 To determine the 5 highest salaries from the Worker table
+
+SELECT * FROM Worker ORDER BY SALARY DESC LIMIT 5;
+
+💡 To show only even rows from the Worker table 
+
+SELECT * FROM Worker WHERE WORKER_ID % 2 = 0;
+
+💡 To fetch the number of workers for each department in descending order from the Worker table
+
+SELECT DEPARTMENT, COUNT(*) as no_of_workers FROM Worker GROUP BY DEPARTMENT ORDER BY no_of_workers DESC;
+
+💡 To fetch the list of employees with the same salary from the Worker table
+
+SELECT * FROM Worker WHERE SALARY IN (SELECT SALARY FROM Worker GROUP BY SALARY HAVING COUNT(*) > 1);

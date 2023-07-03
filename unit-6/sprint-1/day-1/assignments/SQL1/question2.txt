@@ -1,0 +1,13 @@
+1. Filter data based on specific criteria such as Runs_Scored greater than 5000, Player_Type equals to Batsman etc.
+
+2. Sort the data based on a particular column such as Batsman_Name, Runs_Scored, Debut_Year etc.
+
+3. Group the data based on specific columns such as Player_Type, City etc.
+
+4. Calculate the average runs scored by the batsmen or bowlers in the data table.
+
+5. Find the maximum runs scored by a batsman or the highest wicket taker in the table.
+
+6. An operation performed to read the entire table.
+
+7. An operation performed to update the total runs scored of Virat Kohli. Etc.

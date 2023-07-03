@@ -1,0 +1,30 @@
+.dashboard-container {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.grocery-list-container {
+    width: 400px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.search-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+

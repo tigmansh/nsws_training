@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Calculator</title>
+    <style>
+        #heading{
+            text-align: center;
+            color: teal;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #content{
+            width: 18%;
+            margin: auto;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            margin-top: 70px;
+            padding: 50px 40px 50px 50px;
+        }
+        #content > div > div{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-auto-rows: auto;
+            gap: 10px 5px;
+            /* height: 50px;
+            width: 50px; */
+            /* padding:10px; */
+        }
+        #content button{
+            border:0px;
+            border-radius: 10px;
+            background-color: #fff;
+            height: 50px;
+            width: 50px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-size: larger;
+        }
+        #content input{
+            margin-bottom: 20px;
+            border: 0;
+            height: 50px;
+            width: 93%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px; 
+        }
+        #content>div>div > button:nth-child(13){
+            background-color: tomato;
+            color: #fff;
+        }
+        #content>div>div > button:nth-child(4){
+            background-color:black;
+            color: #fff;
+        }
+        #content>div>div > button:nth-child(8){
+            background-color:black;
+            color: #fff;
+        }
+        #content>div>div > button:nth-child(12){
+            background-color:black;
+            color: #fff;
+        }
+        #content>div>div > button:nth-child(15){
+            background-color:black;
+            color: #fff;
+        }
+        #content>div>div > button:nth-child(16){
+            background-color:black;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="heading"><h1>Masai Calculator</h1></div>
+    <div id="content">
+        <div>
+            <input type="Numbers">
+            <div>
+             <button>1</button>
+             <button>2</button>
+             <button>3</button>
+             <button>+</button>
+             <button>4</button>
+             <button>5</button>
+             <button>6</button>
+             <button>-</button>
+             <button>7</button>
+             <button>8</button>
+             <button>9</button>
+             <button>x</button>
+             <button>c</button>
+             <button>0</button>
+             <button>=</button>
+             <button>/</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

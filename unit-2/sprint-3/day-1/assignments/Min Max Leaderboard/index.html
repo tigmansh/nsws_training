@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Games</title>
+    <style>
+      #keypad{
+        display: grid;
+        grid-template-columns: repeat(3,30px);
+        grid-auto-rows: auto;
+        gap: 10px;
+        margin-left: 55px;
+      }
+      #keypad > :nth-child(10){
+        width: 30px;
+        margin-left:40px;
+      }
+      #score{
+        border: 3px solid black;
+        margin-bottom: 10px;
+        width: 110px;
+        height: 30px;
+        margin-left: 55px;
+        font-size: large;
+        color: #fff;
+        background-color: gray;
+      }
+      #enter{
+        margin-top:15px;
+        margin-left: 70px;
+        color: #fff;
+        background-color:black;
+      }
+      #min{
+        border: 3px solid black;
+        margin-bottom: 10px;
+        width: 110px;
+        height: 30px;
+        color: #fff;
+        padding-top: 7px;
+        text-align: center;
+        font-size: large;
+        background-color: red;
+      }
+      #max{
+        border: 3px solid black;
+        margin-bottom: 10px;
+        width: 110px;
+        height: 30px;
+        margin-left: 10px;
+        padding-top: 7px;
+        text-align: center;
+        font-size: large;
+        color: #fff;
+        background-color:green;
+      }
+      button{
+        font-size: large;
+      }
+      body>div{
+        display:flex ;
+      }
+      #keypad > :nth-child(2){
+        background-color: orange;
+      }
+      #keypad > :nth-child(4){
+        background-color: orange;
+      }
+      #keypad > :nth-child(5){
+        background-color: orange;
+      }
+      #keypad > :nth-child(6){
+        background-color: orange;
+      }
+      #keypad > :nth-child(8){
+        background-color: orange;
+      }
+      #keypad > :nth-child(1){
+        background-color: #5F8D4E;
+      }
+      #keypad > :nth-child(3){
+        background-color: #5F8D4E;
+      }
+      #keypad > :nth-child(7){
+        background-color: #5F8D4E;
+      }
+      #keypad > :nth-child(9){
+        background-color: #5F8D4E;
+      }
+      #keypad > :nth-child(10){
+        background-color: purple;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+     <div id="min"></div>
+     <div id="max"></div>
+    </div>
+     <div id="score"></div> 
+     <div id="keypad">  
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>0</button>
+    </div>
+    <button id="enter">ENTER</button>
+  </body>
+  <script>
+   
+    let btn = document.querySelectorAll("#keypad > button");
+    let score = document.getElementById("score");
+    let max = document.getElementById("max");
+    let min = document.getElementById("min");
+    let enter = document.getElementById("enter");
+    let output = "";
+    let count = 0;
+    for(let i=0; i<btn.length; i++){
+      btn[i].addEventListener("click",(e) =>{
+     output += e.target.innerText;
+     score.innerText = output;
+    });
+    }
+   enter.addEventListener("click",()=>{
+    if(count == 0){
+        max.innerText = +score.innerText;
+        min.innerText = +score.innerText;
+        score.innerText = "";
+        output = "";
+        count++;
+      }
+      else{
+        if(+score.innerText < min.innerText){
+          min.innerText = +score.innerText;
+          score.innerText = "";
+          output = "";
+        }
+        else if(+score.innerText > max.innerText){
+          max.innerText = +score.innerText;
+          score.innerText = "";
+          output = "";
+        }
+      }
+      //score.innerText="";
+   });
+  </script>
+</html>

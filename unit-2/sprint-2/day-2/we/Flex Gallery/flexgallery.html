@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flex Gallery</title>
+    <style>
+      nav{
+        display:flex;
+        height: 70px;
+        background-color:#303F9F;
+        color: white;
+        justify-content:space-between;
+        padding: 0px 25px;
+        align-items: center;
+      }
+      .pg{
+        text-align: center;
+        color: red;
+        font-size: larger;
+      }
+      nav > div{
+        display: flex;
+        justify-content: space-between;
+        width: 300px;
+      }
+      .box{
+       display: flex;
+       width: 70%;
+       margin: auto;
+       flex-wrap: wrap;
+       justify-content: space-between;
+      }
+      .box > div{
+        width:30%;
+      }
+      .box img{
+        margin-top: 25px;
+        width: 100%;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://www.masaischool.com/img/navbar/logo.svg" alt="masai logo">
+        <div>
+         <p>HOME</p>
+         <p>GALLERY</p>
+         <p>ABOUT</p>
+        </div>
+   </nav>
+   <p class="pg"><b>PHOTO GALLERY</b></p>
+   <div class="box">
+    <div>
+     <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+    <div>
+        <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+    <div>
+        <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+    <div>
+        <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+    <div>
+        <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+    <div>
+        <img src="https://preview.colorlib.com/theme/pentax/img/project/1.jpg.webp" alt="">
+    </div>
+   </div>
+</body>
+</html>

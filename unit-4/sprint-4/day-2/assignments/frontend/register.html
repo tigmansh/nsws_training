@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTER</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body style="background-image: url(https://images.pexels.com/photos/1629212/pexels-photo-1629212.jpeg?cs=srgb&dl=pexels-min-an-1629212.jpg&fm=jpg);background-repeat: no-repeat;">
+
+    <nav>
+        <a href="login.html">LOGIN</a>
+    </nav>
+
+    <div id="container">
+        <h1>REGISTER HERE</h1>
+
+        <input type="text" id="name" placeholder="Enter your name...">
+
+        <input type="number" id="age" placeholder="Enter your age...">
+
+        <input type="email" id="email" placeholder="Enter your email id...">
+
+        <input type="password" id="pass" placeholder="Enter your password...">
+
+        <button onclick="onRegister()">Register</button>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    function onRegister() {
+        const payload = {
+            name: document.getElementById("name").value,
+            age: document.getElementById("age").value,
+            email: document.getElementById("email").value,
+            pass: document.getElementById("pass").value
+        }
+
+        fetch("https://cute-puce-macaw-cuff.cyclic.app/users/register", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
+        alert("User registered 🎉");
+        window.location.href = "login.html";
+    }
+</script>

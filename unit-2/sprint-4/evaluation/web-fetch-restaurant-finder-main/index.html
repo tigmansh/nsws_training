@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      #restaurant-container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-auto-rows: auto;
+        gap: 25px;
+      }
+      #restaurant-container div{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding-left: 10px;
+        /* height: 400px; */
+      }
+      #restaurant-container img{
+        width: 100%;
+        /* height: 50%; */
+      }
+      #restaurant-container button{
+        display: block;
+        margin: auto;
+        border: 0px;
+        border-radius: 10px;
+        background-color: #00E7FF;
+        color: #fff;
+        width: 120px;
+        height: 40px;
+        font-size: large;
+        margin-bottom: 20px;
+      }
+      #filter{
+        display: block;
+        margin: auto;
+        margin-top: 25px;
+      }
+      .nav{
+        display: flex;
+        justify-content:space-around;
+        width: 100%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Masai Restaurant Finder</h1>
+      <a href="./index.html">Home</a>
+      <a href="./favourites.html">Favourites</a>
+    </div>
+    <select id="filter">
+      <option value="">Filter By Category</option>
+      <option value="cafe">cafe</option>
+      <option value="ethnic">ethnic</option>
+      <option value="fast_food">fast_food</option>
+    </select>
+    <h1 id="alert"></h1>
+    <div id="restaurant-container">
+      <!-- Here Append All the Products  -->
+    </div>
+  </body>
+  <script>
+    const url = fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/getrestaurants?limit=30`);
+    // All your JS code for Home Page goes here
+    let cont = document.getElementById("restaurant-container");
+
+    let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+    let heading = document.getElementById("alert");
+
+    let filtering = document.getElementById("filter");
+    filtering.addEventListener("change", filterProcess);
+
+    let tig = [];
+    function filterProcess(){
+      let value = filtering.value;
+      if(value === "cafe"){
+        abc = tig.filter((element)=>element.type=="cafe");
+        displayHotels(abc);
+      }
+      else if(value === "ethnic"){
+        abc = tig.filter((element)=>element.type=="ethnic");
+        displayHotels(abc);
+      }
+      else if(value === "fast_food"){
+        abc = tig.filter((element)=>element.type=="fast_food");
+        displayHotels(abc);
+      }
+    }
+
+    url.then((responseObject) => {
+      return responseObject.json();
+    })
+
+    .then((acctualData)=>{
+      let hello = acctualData.data;
+      displayHotels(hello);
+      tig = hello;
+    })
+
+    .catch((error) =>{
+      console.log(error);
+    })
+
+    function displayHotels(data){
+      cont.innerHTML = null;
+      data.forEach((element)=>{
+        let card = document.createElement("div");
+
+        let image = document.createElement("img");
+        image.setAttribute("src", element.image);
+
+        let name = document.createElement("h2");
+        name.innerText = element.name;
+
+        let price = document.createElement("h3");
+        price.innerText = element.price_starts_from;
+
+        let type = document.createElement("p");
+        type.innerText = element.type;
+
+        let rating = document.createElement("p");
+        rating.innerText = element.rating;
+
+        let button = document.createElement("button");
+        button.innerText = "Favourites";
+
+        button.addEventListener("click",()=>{
+
+          let already = false;
+          for(let i=0; i<favourites.length; i++){
+            if(favourites[i].id == element.id){
+              already = true;
+              break;
+            }
+          }
+          if(already==true){
+            heading.innerText = "Restaurant Already in Favourites";
+          }
+          else{
+            favourites.push(element);
+            localStorage.setItem("favourites",JSON.stringify(favourites));
+            heading.innerText = "Restaurant Added To Favourites";
+          }
+        })
+        card.append(image,name,price,type,rating,button);
+        cont.append(card);
+      })
+    }
+  </script>
+</html>

@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masai Todo Board</title>
+    <style>
+      .board{
+        display: flex;
+        flex-direction: column;
+      }
+      .board>div{
+        display: flex;
+      }
+      @media screen and (min-width: 900px){
+        .board{
+        display: flex;
+        flex-direction: column;
+        }
+        .board>div{
+        display: flex;
+        flex-direction: column;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <h2>Masai Todo Board</h2>
+      <div>
+        <a href="./index.html">
+          <h2>Home</h2>
+        </a>
+        <a href="./board.html">
+          <h2>Todo Board</h2>
+        </a>
+        <a href="./deleted.html">
+          <h2>Deleted</h2>
+        </a>
+      </div>
+    </div>
+    <div class="board">
+      <div id="todo">
+        <h1>Todo</h1>
+        <div id="todoContainer">
+          <!-- todo status todos here  -->
+        </div>
+      </div>
+      <div id="progress">
+        <h1>Progress</h1>
+        <div id="progressContainer">
+          <!-- progress status todos here  -->
+        </div>
+      </div>
+      <div id="stuck">
+        <h1>Stuck</h1>
+        <div id="stuckContainer">
+          <!-- stuck status todos here  -->
+        </div>
+      </div>
+      <div id="completed">
+        <h1>Completed</h1>
+        <div id="completedContainer">
+          <!-- completed status todos here  -->
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./Scripts/board.js"></script>
+</html>

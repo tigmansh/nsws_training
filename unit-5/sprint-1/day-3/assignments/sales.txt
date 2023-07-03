@@ -1,0 +1,1 @@
+db.sales.aggregate([{ $match: { date: { $lte: new Date("2023-03-05T00:00:00.000Z"), $gte: new Date("2023-02-05T00:00:00.000Z") } } }, { $group: { _id: "$item", quantitySold: { $sum: "$quantity" }, avgPrice: { $avg: "$price" }, totalRevenue: { $sum: "$total" } } }, { $sort: { quantitySold: -1 } }, { $limit: 10 }])

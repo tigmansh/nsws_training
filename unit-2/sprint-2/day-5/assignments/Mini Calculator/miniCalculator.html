@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            margin-top: 20px;
+            margin-left: 540px;
+        }
+        div>button{
+            margin-left: 20px;
+            font-size: large;
+            background-color: #C98474;
+            color: #fff;
+            border: 3px solid black;
+        }
+        #box1{
+            margin-right: 15px;
+            margin-top: 250px;
+            margin-left: 550px;
+        }
+    </style>
+</head>
+<body>
+    <input id="box1" type="number">
+    <input id="box2" type="number">
+    <div>
+      <button onclick="add()">Add</button>
+      <button onclick="subtract()">Subtract</button>
+      <button onclick="multiply()">Multiply</button>
+      <button onclick="divide()">Divide</button>
+    </div>
+</body>
+<script>
+    let bag1=document.getElementById("box1");
+    let bag2=document.getElementById("box2");
+    function add(){
+        alert(+bag1.value + +bag2.value);
+    }
+    function subtract(){
+        alert(+bag1.value - +bag2.value);
+    }
+    function multiply(){
+        alert(+bag1.value * +bag2.value);
+    }
+    function divide(){
+        alert(+bag1.value / +bag2.value);
+    }
+</script>
+</html>

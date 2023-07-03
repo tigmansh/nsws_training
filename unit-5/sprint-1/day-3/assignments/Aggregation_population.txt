@@ -1,0 +1,8 @@
+db.population.aggregate([{$match:{pop:{$gt:5000},state:"MA" }}, {$group:{_id:{state: "$state", city: "$city"}, TotalPopulation:{$sum:"$pop"}}}, {$sort: {TotalPopulation: -1}}, {$skip:2}, {$limit:2}, {$project:{_id:0,state:"$_id.state",city:"$_id.city",TotalPopulation:1}}])
+
+RESULT:-
+
+[
+    { TotalPopulation: 126821, state: 'MA', city: 'DORCHESTER' },
+    { TotalPopulation: 103439, state: 'MA', city: 'LOWELL' }
+]

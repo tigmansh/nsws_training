@@ -1,0 +1,54 @@
+#1 Creating a new collection.
+
+=> db.createCollection("indexing")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#2 Inserting at least 10 documents into the collection, with each document containing at least 3 fields (e.g. name, age, location).
+
+=> db.indexing.insertMany([
+   { name: "John", age: 25, location: "New York", interests: ["music", "movies"] },
+   { name: "Emily", age: 30, location: "San Francisco", interests: ["sports", "reading"] },
+   { name: "Mark", age: 20, location: "London" },
+   { name: "Anna", age: 35, location: "Paris" },
+   { name: "Chris", age: 27, location: "Toronto" },
+   { name: "Kate", age: 40, location: "New York", interests: ["travel", "food"] },
+   { name: "Mike", age: 22, location: "Los Angeles", interests: ["music", "sports"] },
+   { name: "Alice", age: 28, location: "Sydney", interests: ["reading", "travel"] },
+   { name: "Tom", age: 32, location: "Paris" },
+   { name: "Lisa", age: 24, location: "London", interests: ["music", "food"] }
+])
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#3 Creating a compound index on the collection that includes at least 2 fields (e.g. age and location).
+
+=> db.indexing.createIndex({age:1, location:1})
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#4 Using the explain() function to analyze the performance of a query that uses the compound index.
+
+=> db.indexing.find({age: {$lt:30}, location: "London"}).explain()
+
+In this query it uses both indexes i.e age & location and returned 2 docs.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#5 Creating a single field index on a field that is not included in the compound index
+
+=> db.indexing.createIndex({name:1})
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#6 Using the explain() function to compare the performance of a query using the single field index to the performance of a query using the compound index.
+
+=> db.indexing.find({name:"Alice"}).explain()
+
+This used name index to search for this, returned 1 document, excecution time : 0ms, needTime : 0, index key examined : 1
+
+=> db.indexing.find({age: {$lt:30}, location: "London"}).explain()
+
+This used age_1_location_1 index to search for this, returned 2 document, excecution time : 0ms, needTime : 4, index key examined : 7
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#7 Droping the single field index and creating a multi-key index on an array field in one of the documents.
+
+=> db.indexing.dropIndex({name:1})
+
+=> db.indexing.createIndex({interests:1})
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#8 Useing the explain() function to analyze the performance of a query that uses the multi-key index.
+
+=> db.indexing.find({interests:"sports"}).explain()
+
+This used interests_1 index to search for this, returned 2 document, excecution time : 0ms, needTime : 0, index key examined : 2

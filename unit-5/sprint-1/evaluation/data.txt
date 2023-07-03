@@ -1,0 +1,15 @@
+1. Find the total number of sales data based on gender
+
+=> db.data.aggregate([ {$unwind: "$items"}, { $group:{_id:"$customer.gender", totalSales:{$sum:{$multiply: ["$items.price","$items.quantity"]}}} }])
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. Find the top 3 stores based on the total number of sales being made
+
+=> db.data.aggregate([{$project: {_id: "$storeLocation", totalSales: {$size: "$items"}}}, {$group: {_id: "$_id", totalSales:{$sum: "$totalSales"}}},{$sort:{totalSales:-1}}, {$limit:3}])
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3. Find the stores based on total sales made as well as average customer satisfaction rating per store in descending order of rating
+
+=> db.data.aggregate([{$project: {_id: "$storeLocation", totalSales: {$size: "$items"}, satisfaction: {$sum: "$customer.satisfaction"}}}, {$group: {_id: "$_id", totalSales:{$sum: "$totalSales"}, avgSatisfaction: {$avg: "$satisfaction"}}}, {$sort: {avgSatisfaction:-1}}])
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4. Find total sales made in each store
+
+=> db.data.aggregate([{$project: {_id: "$storeLocation", totalSales: {$size: "$items"}}}])

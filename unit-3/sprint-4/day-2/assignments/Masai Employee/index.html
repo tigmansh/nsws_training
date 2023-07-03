@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>Log in an existing User</h4>
+          <input type="text" id="login-user-username" class="u-full-width" placeholder="username" />
+          <input type="password" id="login-user-passowrd" class="u-full-width" placeholder="password" />
+          <button id="login-user" class="u-full-width button button-primary">Login User</button>
+          <h2 id=""></h2>
+</body>
+
+<script>
+    let user = document.getElementById("login-user-username");
+    let pass = document.getElementById("login-user-password");
+    let btn = document.getElementById("login-user");
+
+    let loginData = {
+     "email" : "eve.holt@reqres.in",
+     "password" : "cityslicka"
+    };
+
+btn.addEventListener("click", (e)=>{
+    e.preventDefault();
+ fetch("https://reqres.in/api/login", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(loginData)
+})
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.token) {
+          
+            localStorage.setItem("token", data.token);
+            
+            alert("Your Token :- " + data.token);
+            window.location.href="./employee.html";
+        } else {
+        
+            console.log("Login failed: " + data.error);
+        }
+    })
+    .catch(error => console.log("Error: " + error));
+})
+    
+</script>
+
+</html>

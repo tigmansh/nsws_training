@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Page</title>
+    <style>
+      /* All Your css for Order page goes here  */
+      #order-container{
+        display: grid;
+        margin-left: 300px;
+        grid-template-columns: repeat(4,200px);
+        gap: 20px 40px;
+      }
+      #order-container img{
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Web Coffee Shop Menu</h1>
+      <a href="./index.html">Home</a>
+      <a href="./order.html">Ordered</a>
+    </div>
+    <h1 id="total">
+      Your total order value is :- <span id="order-total">0</span>
+    </h1>
+    <div id="cupon">
+      <input type="text" id="cuponValue"/>
+      <button id="cuponBtn">Add Cupon</button>
+    </div>
+    <div id="order-container">
+      <!-- Here Append All the Order Cards here-->
+    </div>
+  </body>
+  <script>
+    let cuponBtn = document.getElementById("cuponBtn");
+    let cupon = document.getElementById("cuponValue");
+    let coffeeData = JSON.parse(localStorage.getItem("buy")) || [];
+    let container = document.getElementById("order-container");
+    let totalPrice = document.getElementById("order-total");
+
+    function displayOrder(){
+      container.innerHTML = null;
+      coffeeData.forEach((ele,index)=>{
+        let card = document.createElement("div");
+        let image = document.createElement("img");
+        image.setAttribute("src", ele.image);
+        let name = document.createElement("h3");
+        name.innerText = ele.title;
+        let desc = document.createElement("p");
+        desc.innerText = ele.description;
+        let price = document.createElement("p");
+        price.innerText = ele.price;
+        let plus = document.createElement("button");
+        plus.innerText = "+";
+        let qty = document.createElement("span");
+        qty.innerText = ele.quantity;
+        let minus = document.createElement("button");
+        minus.innerText = "-";
+        let remove = document.createElement("button");
+        remove.innerText = "Cancel";
+
+        plus.addEventListener("click",()=>{
+          ele.quantity++;
+          qty.innerText = ele.quantity;
+          totalPrice.innerText = +totalPrice.innerText + ele.price;
+        })
+        minus.addEventListener("click",()=>{
+          ele.quantity--;
+          qty.innerText = ele.quantity;
+          if(qty.innerText > 0){
+            totalPrice.innerText = +totalPrice.innerText - ele.price;
+          }
+          if(qty.innerText == 0){
+            totalPrice.innerText = +totalPrice.innerText - ele.price;
+            card.remove();
+            coffeeData.splice(index,1);
+            localStorage.setItem("buy",JSON.stringify(coffeeData));
+            displayOrder();
+          }
+        })
+        remove.addEventListener("click",()=>{
+          totalPrice.innerText = +totalPrice.innerText - (ele.price * ele.quantity);
+          coffeeData.splice(index,1);
+          localStorage.setItem("buy",JSON.stringify(coffeeData));
+          displayOrder();
+        })
+        card.append(image,name,desc,price,plus,qty,minus,remove);
+        container.append(card);
+      });
+    }
+    displayOrder();
+
+    qty();
+    function qty(){
+      let sum = 0;
+      for(let i=0; i<coffeeData.length; i++){
+        sum+= coffeeData[i].quantity * coffeeData[i].price;
+      }
+      totalPrice.innerText = sum;
+    }
+    
+    
+    cuponBtn.addEventListener("click",()=>{
+      if(cuponValue.value == "Masai30"){
+  
+        let total = totalPrice.innerText
+        total = Math.floor((total)-(total*0.3));
+        totalPrice.innerText = total;
+      }
+    }, {once: true});
+    // All your JS code for Order Page goes here
+  </script>
+</html>

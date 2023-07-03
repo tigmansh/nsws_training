@@ -1,0 +1,39 @@
+1) Write an aggregation pipeline to get the total number of orders for each customer.
+
+=> db.orders.aggregate([{ $project: {_id: "$name", TotalOrders: {$size: "$orders"}}}])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+2) Write an aggregation pipeline to get the total price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", TotalPrice: {$sum: {$multiply:["$orders.price", "$orders.quantity"] }}} }])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+3) Write an aggregation pipeline to get the average price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", AveragePrice: {$avg: {$multiply:["$orders.price", "$orders.quantity"] }}} }])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+4) Write an aggregation pipeline to get the highest price of all orders for each customer.
+
+=> db.orders.aggregate([{ $project: {_id: "$name", HighestPrice: {$max: "$orders.price"}}}])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+5) Write an aggregation pipeline to get the lowest price of all orders for each customer.
+
+=> db.orders.aggregate([{ $project: {_id: "$name", LowestPrice: {$min: "$orders.price"}}}])
+--------------------------------------------------------------------------------------------------------------------------------------------------
+6) Write an aggregation pipeline to get the total number of orders and the total price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", TotalOrders: {$sum:1}, TotalPrice: {$sum: {$multiply:["$orders.price","$orders.quantity"]}}}}])
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7) Write an aggregation pipeline to get the total number of orders and the average price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", TotalOrders: {$sum:1}, AveragePrice: {$avg: {$multiply:["$orders.price","$orders.quantity"]}}}}])
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8) Write an aggregation pipeline to get the highest price and the lowest price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", HighestPrice: {$max: {$multiply: ["$orders.price", "$orders.quantity"] }}, LowestPrice: {$min: {$multiply: ["$orders.price","$orders.quantity"]}}}}])
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9) Write an aggregation pipeline to get the total number of orders and the highest price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", TotalOrders: {$sum:1}, HighestPrice: {$max: {$multiply:["$orders.price","$orders.quantity"]}}}}])
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+10) Write an aggregation pipeline to get the total number of orders, the total price, and the average price of all orders for each customer.
+
+=> db.orders.aggregate([{$unwind: "$orders"}, {$group: {_id:"$name", TotalOrders: {$sum:1}, TotalPrice: {$sum: {$multiply:["$orders.price","$orders.quantity"]}}, AveragePrice: {$avg: {$multiply:["$orders.price","$orders.quantity"]}}}}])

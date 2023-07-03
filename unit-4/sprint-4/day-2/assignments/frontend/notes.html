@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOUR NOTES</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+   
+    <nav>
+        <a href="createNotes.html">CREATE NOTES</a>
+    </nav>
+
+    <div id="parent" style="display: grid; grid-template-columns: repeat(4,25%); gap: 20px 3%;">
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    var mainDiv = document.getElementById("parent");
+    function getData() {
+        fetch("https://cute-puce-macaw-cuff.cyclic.app/notes/", {
+            headers: {
+                "Authorization": localStorage.getItem("token")
+            }
+        }).then(res => res.json())
+            .then(res => {
+                for (let i = 0; i < res.length; i++) {
+                    let card = document.createElement("div");
+                    let title = document.createElement("h2");
+                    let note = document.createElement("p");
+                    let category = document.createElement("p");
+                    let delete_btn = document.createElement("button");
+                    // delete_btn.setAttribute("id","dlt");
+                    delete_btn.innerText = "DELETE 🚮"
+                    title.innerText = res[i].title
+                    note.innerText = res[i].note
+                    category.innerText = res[i].category
+                    card.append(title, note, category, delete_btn);
+                    mainDiv.append(card);
+                }
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
+    getData();
+</script>

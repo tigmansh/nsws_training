@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* All Your css for Home page goes here  */
+      #menu-container{
+        display: grid;
+        margin-left: 300px;
+        grid-template-columns: repeat(4,200px);
+        gap: 20px 40px;
+      }
+      #menu-container img{
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Web Coffee Shop Menu</h1>
+      <a href="./index.html">Home</a>
+      <a href="./order.html">Ordered</a>
+    </div>
+    <div id="filter">
+      <input type="number" id="lower" />
+      <input type="number" id="upper" />
+      <button id="filter-btn">Filter</button>
+    </div>
+    <select id="sort">
+      <option value="">Sort By Price</option>
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <h1 id="alert"></h1>
+    <div id="menu-container">
+      <!-- Here Append All the Items  -->
+    </div>
+  </body>
+  <script>
+    // All your JS code for Home Page goes here
+   let sort = document.getElementById("sort");
+   let alerted = document.getElementById("alert");
+    let cont = document.getElementById("menu-container");
+
+    const url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee`;
+    
+   window.addEventListener("load",function(){
+    let fetchUrl = fetch(url);
+    fetchUrl.then((res)=>{
+      return res.json();
+    })
+    .then((res)=>{
+      data = res.data;
+      console.log(data);
+      rendering(data)
+    })
+   })
+
+   function rendering(data){
+    cont.innerHTML = null;
+    data.forEach(ele =>{
+      let card = document.createElement("div");
+      let image = document.createElement("img");
+      image.setAttribute("src", `${ele.image}`)
+      let name = document.createElement("h3");
+      name.innerText = ele.title;
+      let desc = document.createElement("p");
+      desc.innerText = ele.description;
+      let price = document.createElement("p");
+      price.innerText = ele.price;
+      let buy = document.createElement("button");
+      buy.innerText = "Buy"
+    
+       buy.addEventListener("click",(e)=>{
+        let coffeeData = JSON.parse(localStorage.getItem("buy")) || [];
+        let already = false;
+        for(let i=0; i<coffeeData.length; i++){
+          if(coffeeData[i].id == ele.id){
+            already = true;
+            break;
+          }
+        }
+        if(already==true){
+            alerted.innerText = "Already Placed Order";
+          }
+          else{
+            coffeeData.push({...ele,quantity:1});
+            localStorage.setItem("buy",JSON.stringify(coffeeData));
+            alerted.innerText = "Successfully Placed Order"
+          }
+       })
+      card.append(image,name,desc,price,buy);
+      cont.append(card);
+    })
+   }
+
+   // fillter Part
+
+   let lower = document.getElementById("lower");
+   let upper = document.getElementById("upper");
+   let filterBtn = document.getElementById("filter-btn");
+   let filtered = []
+   filterBtn.addEventListener("click",()=>{
+    filtered = data.filter((element)=>{
+      if(element.price >= lower.value && element.price <= upper.value){
+        return element;
+      }
+    })
+    rendering(filtered);
+   })
+
+   // Sorting Part
+
+   sort.addEventListener("change",()=>{
+    if(sort.value == "desc"){
+      fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?sort=price&order=desc`)
+      .then((res)=>{
+      return res.json();
+      })
+      .then((res)=>{
+      desc = res.data;
+      console.log(desc);
+      rendering(desc);
+    })
+    }
+
+    else if(sort.value == "asc"){
+      fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?sort=price&order=asc`)
+      .then((res)=>{
+      return res.json();
+      })
+      .then((res)=>{
+      asc = res.data;
+      console.log(asc);
+      rendering(asc);
+    })
+    }
+   })
+
+   // Buy Part
+  
+  </script>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-101 C2</title>
+    <style>
+      #top > div{
+        display:flex;
+        justify-content: space-between;
+      }
+      #top img{
+        width:35%;
+        /* padding-left: 250px; */
+      }
+      #top > h1{
+        text-align: center;
+      }
+      #top>p{
+        text-align: center;
+      }
+      #mid > h1{
+        text-align: center;
+      }
+      #mid>p{
+        text-align: center;
+      }
+      #mid>div{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-auto-rows: auto;
+        gap: 10px;
+        margin-top: 40px;
+       
+      }
+      #mid > div > div{
+        background-color:#334257;
+        padding: 30px;
+        color: white;
+      }
+      #mid > div > div > img{
+        width: 50px;
+        height: 50px;
+      }
+      #bottom > h1{
+        text-align: center;
+      }
+      #bottom > p{
+        text-align: center;
+      }
+      #bottom > div{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-auto-rows: auto;
+        gap: 20px;
+      }
+      #bottom > div > div > h3{
+        padding-left: 40px;
+      }
+      /* FOR MEDIUM SCREEN SIZE */
+      @media screen and (min-width:501px) and (max-width:900px){
+        #top>div{
+          display: flex;
+          flex-direction: column;
+        }
+        #mid>div{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-auto-rows: auto;
+        }
+        #bottom > div{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-auto-rows: auto;
+      }
+      }
+      /* FOR SMALL SCREEN SIZE */
+      @media screen and (max-width:500px){
+        #top>div{
+          display: flex;
+          flex-direction: column;
+        }
+        #mid>div{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-auto-rows: auto;
+        }
+        #bottom > div{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-auto-rows: auto;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="top">
+         <h1>Trillo Workbench</h1>
+         <p>Server-side Low-code Platform</p>
+        <div>
+          <!-- Here should be one div for the text part and one image. Use flex to create the layout  -->
+          <div>
+            <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br> Autem sunt ex veniam doloremque possimus hic, quia <br> eum necessitatibus fugit? Consequatur.</h2>
+            <p><b>90% cost and Time-Saving</b></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam magnam veniam minima <br> deleniti est sequi qui provident fuga sunt corrupti delectus doloribus ratione beatae, illum porro <br> natus! Dolorem, ex a!</p>
+            <h3>How Trillo Workbench Achieves 90% saving</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam magnam veniam minima deleniti <br> est sequi qui provident fuga sunt corrupti delectus doloribus ratione beatae, illum porro natus! <br> Dolorem, ex a!</p>
+          </div>
+          <img src="https://www.trillo.io/wp-content/uploads/2022/04/trillo-Workbench-UI-Macbook.png" alt="Laptop">
+        </div>
+      </div>
+
+      <div id="mid">
+        <h1>Trillo Applications</h1>
+        <p>
+          Trillo Applications are customizable end-to-end applications (Open
+          Source Code). The can be used out of the box or extended.
+        </p>
+        <div>
+          <!-- Here you should have 6 children divs. Use grid to create the layout -->
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo Text Matching</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo File Manager</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo NLP</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo Vision AI</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo Document AI</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+          <div>
+            <img src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-11-22/Screenshot%202022-11-22%20at%2012.29.09%20PM_869111.png" alt="mid">
+            <h3>Trillo DICOM</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem! <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Iste, ut quam. Optio accusantium perferendis voluptatem!</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="bottom">
+        <h1>Use Cases</h1>
+        <p>
+          Trillo has readymade templates for several use cases that can be
+          customized quickly to deliver the solutions as per your requirements.
+          Some of these templates are described below.
+        </p>
+        <div>
+          <!-- Here you should have 6 children divs. Use grid to create the layout -->
+          <div>
+            <h3>Data Warehouse</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>AI Driven Workflows</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>AI Vision</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Storage</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>New Web Applications</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Natural Language Processing</h3>
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+              <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

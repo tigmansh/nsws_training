@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Movie App</title>
+    <style>
+      /* Write necessery styles here  */
+    </style>
+  </head>
+  <body>
+    <div id="serach">
+      <input type="text" id="search-inp" placeholder="Search"/>
+      <button id="search-btn">Search</button>
+    </div>
+    <div id="movie_container"></div>
+  </body>
+
+  <script>
+    let heading = document.createElement("h2");
+    heading.setAttribute("class", "error-container");
+    
+    let container = document.getElementById("movie_container");
+
+    document.querySelector("button").addEventListener("click", ()=>{
+      let movie = document.querySelector("input").value;
+      getData(movie);
+    });
+
+    async function getData(name) {
+      try {
+      let res = await fetch(`https://www.omdbapi.com/?apiKey=36be1ae&s=${name}`);
+      let data = await res.json();
+      let abcd = data.Search;
+      container.innerHTML = null;
+      displayHere(abcd);
+        
+      } 
+      catch (error) {
+        container.innerHTML = null;
+        heading.innerText = "Movie not found!";
+        container.append(heading);
+      }
+      
+
+}
+
+function displayHere(data){
+      data.forEach((element) =>{
+    
+       let product = document.createElement("div");
+        
+        let Poster = document.createElement("img");
+        Poster.setAttribute("src", element.Poster);
+
+        Poster.setAttribute("class", "poster");
+
+        let title = document.createElement("h1");
+        title.innerText = element.Title;
+
+        title.setAttribute("class", "title")
+        
+        product.append(Poster,title);
+
+        container.append(product);
+        
+      });
+ }
+
+  </script>
+</html>

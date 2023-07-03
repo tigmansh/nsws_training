@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+       
+       #calculator
+        {
+          margin: auto;
+          margin-top: 130px;
+          width: 240px;
+          height: 360px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 15px;
+          padding-right: 15px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+        #calculator input[type="text"] {
+          width: 93%;
+          height: 60px;
+          text-align: right;
+        }
+
+        #calculator input[type="button"] 
+        {
+         margin-top: 10px;
+         background-color:cornflowerblue;
+         color: aliceblue;
+         font-size: large;
+         border: 0px;
+         border-radius: 5px;
+          width: 23%;
+          height: 50px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="calculator">
+        <input type="text" id="display" disabled />
+  
+        <input type="button" value="7" />
+        <input type="button" value="8" />
+        <input type="button" value="9" />
+        <input type="button" value="+" />
+    
+        <input type="button" value="4" />
+        <input type="button" value="5" />
+        <input type="button" value="6" />
+        <input type="button" value="-" />
+  
+        <input type="button" value="1" />
+        <input type="button" value="2" />
+        <input type="button" value="3" />
+        <input type="button" value="*" />
+    
+        <input type="button" value="0" />
+        <input type="button" value="." />
+        <input type="button" value="=" />
+        <input type="button" value="/" />
+        <input type="button" value="C" />
+    </form>
+
+</body>
+<script>
+
+function calculate(e) {
+  // Get the value of the clicked button
+
+  const value = e.target.value;
+
+  // Get the current value in the display
+
+  const display = document.getElementById('display');
+  let currentValue = display.value;
+
+  // Check if the value is the clear button
+
+  if (value === 'C') {
+    // If it is, reset the display to an empty string
+
+    display.value = '';
+  } 
+  else {
+    // If not, check if the value is a number or decimal point
+
+    if (!isNaN(value) || value === '.') {
+      // If it is, append it to the current value in the display
+      
+      display.value = currentValue + value;
+    } else {
+      
+        // If not, it is an operator
+      // Check if there is already an operator in the current value
+
+      if (currentValue.includes('+') || currentValue.includes('-') || currentValue.includes('*') || currentValue.includes('/')) {
+       
+        // If there is, replace the operator with the new operator
+
+        display.value = currentValue.replace(/[+-/*]/, value);
+      } else {
+        
+        // If not, append the operator to the current value in the display
+
+        display.value = currentValue + value;
+      }
+
+      // Check if the value is the equal sign
+
+      if (value === '=') {
+
+        // If it is, perform the calculation and update the display
+
+        display.value = eval(currentValue);
+      }
+    }
+  }
+}
+
+// Get all the buttons in the calculator
+
+const buttons = document.querySelectorAll('#calculator input[type="button"]');
+
+// Add a click event listener to each button
+
+buttons.forEach(button => button.addEventListener('click', calculate));
+
+</script>
+</html>
